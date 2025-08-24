@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>شين اليمن - SHEIN Yemen</title>
+    <meta name="description" content="تسوق من SHEIN بسهولة مع الدفع عند الاستلام والشحن إلى اليمن">
+    <meta name="keywords" content="شين, اليمن, تسوق, ملابس, موضة, SHEIN, Yemen, Shopping">
+    <meta name="author" content="SHEIN Yemen Team">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="application-name" content="شين اليمن">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="شين اليمن">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <meta name="msapplication-TileColor" content="#ff6b6b">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="theme-color" content="#ff6b6b">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- PWA Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16x16.png">
+    <link rel="shortcut icon" href="icons/favicon.ico">
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" href="icons/icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180x180.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="icons/icon-167x167.png">
+    
+    <!-- Microsoft Tiles -->
+    <meta name="msapplication-TileImage" content="icons/icon-144x144.png">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="شين اليمن - SHEIN Yemen">
+    <meta property="og:description" content="تسوق من SHEIN بسهولة مع الدفع عند الاستلام والشحن إلى اليمن">
+    <meta property="og:site_name" content="شين اليمن">
+    <meta property="og:url" content="https://shein-yemen.com">
+    <meta property="og:image" content="icons/icon-512x512.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* PWA Install Banner */
+        .install-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            z-index: 2000;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .install-banner.show {
+            transform: translateY(0);
+        }
+        
+        .install-banner button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            margin: 0 0.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .install-banner button:hover {
+            background: white;
+            color: #ff6b6b;
+        }
+        
+        /* Offline Indicator */
+        .offline-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #f44336;
+            color: white;
+            text-align: center;
+            padding: 0.5rem;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+            z-index: 2000;
+        }
+        
+        .offline-indicator.show {
+            transform: translateY(0);
+        }
+        
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: #333;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 2rem 0;
+            min-height: calc(100vh - 80px);
+        }
+        
+        .hero {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        .card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* Search Section */
+        .search-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .search-form {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #ff6b6b;
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+        }
+        
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 500;
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .product-info {
+            padding: 1rem;
+        }
+        
+        .product-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .current-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ff6b6b;
+        }
+        
+        .original-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        .discount {
+            background: #ff6b6b;
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+        }
+        
+        /* Chat Widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+        }
+        
+        .chat-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .chat-button:hover {
+            transform: scale(1.1);
+        }
+        
+        .chat-button:active {
+            transform: scale(0.95);
+        }
+        
+        /* Loading */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            color: white;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid white;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Status Messages */
+        .status-message {
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            .hero {
+                padding: 1rem 0;
+                margin-bottom: 2rem;
+            }
+            
+            .search-form {
+                flex-direction: column;
+            }
+            
+            .nav-buttons {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 0.5rem 0;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .search-section {
+                padding: 1.5rem;
+                margin-bottom: 2rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .product-image {
+                height: 150px;
+                font-size: 1rem;
+            }
+            
+            .chat-widget {
+                bottom: 15px;
+                left: 15px;
+            }
+            
+            .chat-button {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+        
+        /* PWA Specific Styles */
+        @media (display-mode: standalone) {
+            .header {
+                padding-top: env(safe-area-inset-top);
+            }
+            
+            .main-content {
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+        }
+        
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            .card {
+                background: rgba(255, 255, 255, 0.1);
+                color: white;
+            }
+            
+            .card h3 {
+                color: white;
+            }
+            
+            .search-section {
+                background: rgba(255, 255, 255, 0.1);
+                color: white;
+            }
+            
+            .search-input {
+                background: rgba(255, 255, 255, 0.1);
+                color: white;
+                border-color: rgba(255, 255, 255, 0.3);
+            }
+            
+            .search-input::placeholder {
+                color: rgba(255, 255, 255, 0.7);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- PWA Install Banner -->
+    <div class="install-banner" id="install-banner">
+        <div>
+            <i class="fas fa-download"></i>
+            <strong>ثبت التطبيق على جهازك</strong>
+            <p>للحصول على تجربة أفضل وأسرع</p>
+        </div>
+        <div style="margin-top: 0.5rem;">
+            <button onclick="installPWA()">تثبيت</button>
+            <button onclick="dismissInstallBanner()">لاحقاً</button>
+        </div>
+    </div>
+    
+    <!-- Offline Indicator -->
+    <div class="offline-indicator" id="offline-indicator">
+        <i class="fas fa-wifi"></i>
+        لا يوجد اتصال بالإنترنت - تعمل في وضع عدم الاتصال
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-shopping-bag"></i>
+                    شين اليمن
+                </div>
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="showUserForm()">
+                        <i class="fas fa-user"></i>
+                        تسجيل الدخول
+                    </button>
+                    <button class="btn btn-primary" onclick="showCart()">
+                        <i class="fas fa-shopping-cart"></i>
+                        السلة (<span id="cart-count">0</span>)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero">
+                <h1>مرحباً بكم في شين اليمن</h1>
+                <p>تسوق من SHEIN بسهولة مع الدفع عند الاستلام والشحن المجاني إلى اليمن</p>
+                <button class="btn btn-primary" onclick="scrollToProducts()">
+                    <i class="fas fa-search"></i>
+                    ابدأ التسوق الآن
+                </button>
+            </section>
+
+            <!-- Features Cards -->
+            <section class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>شحن مجاني</h3>
+                    <p>شحن مجاني لجميع الطلبات إلى اليمن خلال 7-14 يوم عمل</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3>دفع عند الاستلام</h3>
+                    <p>ادفع نقداً عند وصول طلبك - لا حاجة لبطاقة ائتمان</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3>نظام المكافآت</h3>
+                    <p>احصل على نقاط مع كل طلب واستخدم كود SVMR3 للخصومات</p>
+                </div>
+            </section>
+
+            <!-- Search Section -->
+            <section class="search-section" id="products-section">
+                <h2 style="text-align: center; margin-bottom: 2rem; color: #333;">
+                    <i class="fas fa-search"></i>
+                    ابحث عن منتجاتك المفضلة
+                </h2>
+                
+                <div class="search-form">
+                    <input type="text" id="search-input" class="search-input" placeholder="ابحث عن الملابس، الأحذية، الإكسسوارات...">
+                    <button class="btn btn-primary" onclick="searchProducts()">
+                        <i class="fas fa-search"></i>
+                        بحث
+                    </button>
+                </div>
+                
+                <div class="status-message" id="status-message"></div>
+                
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>جاري البحث...</p>
+                </div>
+                
+                <div class="products-grid" id="products-grid">
+                    <!-- Products will be loaded here -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Chat Widget -->
+    <div class="chat-widget">
+        <button class="chat-button" onclick="openChat()" title="المساعد الذكي">
+            <i class="fas fa-comments"></i>
+        </button>
+    </div>
+
+    <script>
+        // PWA Variables
+        let deferredPrompt;
+        let isOnline = navigator.onLine;
+        
+        // API Base URL
+        const API_BASE = 'http://localhost:8000';
+        
+        // Global variables
+        let currentUser = null;
+        let cart = [];
+        
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePWA();
+            loadInitialProducts();
+            loadCartFromStorage();
+            updateCartCount();
+            checkOnlineStatus();
+        });
+        
+        // PWA Initialization
+        function initializePWA() {
+            // Register Service Worker
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('✅ Service Worker registered:', registration);
+                        
+                        // Check for updates
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    showUpdateAvailable();
+                                }
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        console.log('❌ Service Worker registration failed:', error);
+                    });
+            }
+            
+            // Handle install prompt
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                showInstallBanner();
+            });
+            
+            // Handle app installed
+            window.addEventListener('appinstalled', () => {
+                console.log('✅ PWA installed successfully');
+                hideInstallBanner();
+                showStatus('تم تثبيت التطبيق بنجاح!', 'success');
+            });
+            
+            // Handle online/offline status
+            window.addEventListener('online', () => {
+                isOnline = true;
+                hideOfflineIndicator();
+                showStatus('تم استعادة الاتصال بالإنترنت', 'success');
+            });
+            
+            window.addEventListener('offline', () => {
+                isOnline = false;
+                showOfflineIndicator();
+                showStatus('لا يوجد اتصال بالإنترنت - العمل في وضع عدم الاتصال', 'error');
+            });
+        }
+        
+        // PWA Install Functions
+        function showInstallBanner() {
+            const banner = document.getElementById('install-banner');
+            banner.classList.add('show');
+        }
+        
+        function hideInstallBanner() {
+            const banner = document.getElementById('install-banner');
+            banner.classList.remove('show');
+        }
+        
+        function dismissInstallBanner() {
+            hideInstallBanner();
+            localStorage.setItem('install-dismissed', 'true');
+        }
+        
+        async function installPWA() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                
+                if (outcome === 'accepted') {
+                    console.log('✅ User accepted PWA install');
+                } else {
+                    console.log('❌ User dismissed PWA install');
+                }
+                
+                deferredPrompt = null;
+                hideInstallBanner();
+            }
+        }
+        
+        // Online/Offline Functions
+        function showOfflineIndicator() {
+            const indicator = document.getElementById('offline-indicator');
+            indicator.classList.add('show');
+        }
+        
+        function hideOfflineIndicator() {
+            const indicator = document.getElementById('offline-indicator');
+            indicator.classList.remove('show');
+        }
+        
+        function checkOnlineStatus() {
+            if (!isOnline) {
+                showOfflineIndicator();
+            }
+        }
+        
+        function showUpdateAvailable() {
+            if (confirm('يتوفر تحديث جديد للتطبيق. هل تريد إعادة التحميل؟')) {
+                window.location.reload();
+            }
+        }
+        
+        // Load initial products
+        async function loadInitialProducts() {
+            try {
+                showLoading(true);
+                const response = await fetch(`${API_BASE}/api/products`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayProducts(data.products);
+                } else {
+                    showStatus('خطأ في تحميل المنتجات', 'error');
+                }
+            } catch (error) {
+                console.error('Error loading products:', error);
+                if (isOnline) {
+                    showStatus('تعذر الاتصال بالخادم. تأكد من تشغيل الخادم على المنفذ 8000', 'error');
+                } else {
+                    showStatus('لا يوجد اتصال بالإنترنت', 'error');
+                    loadOfflineProducts();
+                }
+            } finally {
+                showLoading(false);
+            }
+        }
+        
+        // Load offline products (cached or sample data)
+        function loadOfflineProducts() {
+            const sampleProducts = [
+                {
+                    id: 'offline_1',
+                    title: 'منتج محفوظ 1',
+                    price: 19.99,
+                    original_price: 29.99,
+                    discount: '33%'
+                },
+                {
+                    id: 'offline_2',
+                    title: 'منتج محفوظ 2',
+                    price: 24.99,
+                    original_price: 39.99,
+                    discount: '38%'
+                }
+            ];
+            
+            displayProducts(sampleProducts);
+            showStatus('عرض المنتجات المحفوظة - وضع عدم الاتصال', 'error');
+        }
+        
+        // Search products
+        async function searchProducts() {
+            const query = document.getElementById('search-input').value.trim();
+            if (!query) {
+                showStatus('يرجى إدخال كلمة البحث', 'error');
+                return;
+            }
+            
+            try {
+                showLoading(true);
+                const response = await fetch(`${API_BASE}/api/products/search`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ query: query })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    displayProducts(data.products);
+                    showStatus(`تم العثور على ${data.total_results} منتج`, 'success');
+                } else {
+                    showStatus('لم يتم العثور على منتجات', 'error');
+                }
+            } catch (error) {
+                console.error('Error searching products:', error);
+                if (isOnline) {
+                    showStatus('خطأ في البحث', 'error');
+                } else {
+                    showStatus('البحث غير متاح بدون اتصال', 'error');
+                }
+            } finally {
+                showLoading(false);
+            }
+        }
+        
+        // Display products
+        function displayProducts(products) {
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = '';
+            
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <div class="product-image">
+                        <i class="fas fa-tshirt"></i>
+                        ${product.title}
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">${product.title}</div>
+                        <div class="product-price">
+                            <span class="current-price">$${product.price}</span>
+                            <span class="original-price">$${product.original_price}</span>
+                            <span class="discount">${product.discount}</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="addToCart('${product.id}')" style="width: 100%;">
+                            <i class="fas fa-cart-plus"></i>
+                            أضف للسلة
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(productCard);
+            });
+        }
+        
+        // Add to cart
+        function addToCart(productId) {
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: productId,
+                    quantity: 1,
+                    addedAt: new Date().toISOString()
+                });
+            }
+            
+            saveCartToStorage();
+            updateCartCount();
+            showStatus('تم إضافة المنتج للسلة', 'success');
+            
+            // Vibrate if supported
+            if ('vibrate' in navigator) {
+                navigator.vibrate(100);
+            }
+        }
+        
+        // Cart functions
+        function updateCartCount() {
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cart-count').textContent = count;
+        }
+        
+        function saveCartToStorage() {
+            localStorage.setItem('shein_yemen_cart', JSON.stringify(cart));
+        }
+        
+        function loadCartFromStorage() {
+            const saved = localStorage.getItem('shein_yemen_cart');
+            if (saved) {
+                cart = JSON.parse(saved);
+            }
+        }
+        
+        function showCart() {
+            if (cart.length === 0) {
+                alert('السلة فارغة');
+                return;
+            }
+            
+            let cartContent = 'محتويات السلة:\n\n';
+            cart.forEach(item => {
+                cartContent += `المنتج: ${item.id}\nالكمية: ${item.quantity}\n\n`;
+            });
+            
+            cartContent += 'هل تريد إتمام الطلب؟';
+            
+            if (confirm(cartContent)) {
+                if (!currentUser) {
+                    alert('يرجى تسجيل الدخول أولاً');
+                    showUserForm();
+                } else {
+                    createOrder();
+                }
+            }
+        }
+        
+        // User functions
+        function showUserForm() {
+            const name = prompt('الاسم الكامل:');
+            if (!name) return;
+            
+            const email = prompt('البريد الإلكتروني:');
+            if (!email) return;
+            
+            const phone = prompt('رقم الهاتف:');
+            if (!phone) return;
+            
+            const address = prompt('العنوان الكامل:');
+            if (!address) return;
+            
+            registerUser({ name, email, phone, address });
+        }
+        
+        async function registerUser(userData) {
+            try {
+                const response = await fetch(`${API_BASE}/api/users/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(userData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    currentUser = { ...userData, user_id: data.user_id };
+                    showStatus(`مرحباً ${userData.name}! تم تسجيلك بنجاح`, 'success');
+                } else {
+                    showStatus(data.error || 'خطأ في التسجيل', 'error');
+                }
+            } catch (error) {
+                console.error('Error registering user:', error);
+                showStatus('خطأ في التسجيل', 'error');
+            }
+        }
+        
+        // Order functions
+        async function createOrder() {
+            if (!currentUser || cart.length === 0) return;
+            
+            const orderData = {
+                user_id: currentUser.user_id,
+                products: cart,
+                total_amount: cart.length * 25.99,
+                shipping_address: currentUser.address
+            };
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/orders/create`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(orderData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert(`تم إنشاء الطلب بنجاح!\nرقم التتبع: ${data.tracking_number}\nالتسليم المتوقع: ${data.estimated_delivery}`);
+                    cart = [];
+                    saveCartToStorage();
+                    updateCartCount();
+                    
+                    // Show notification if supported
+                    if ('Notification' in window && Notification.permission === 'granted') {
+                        new Notification('شين اليمن', {
+                            body: 'تم إنشاء طلبك بنجاح!',
+                            icon: 'icons/icon-192x192.png'
+                        });
+                    }
+                } else {
+                    showStatus(data.error || 'خطأ في إنشاء الطلب', 'error');
+                }
+            } catch (error) {
+                console.error('Error creating order:', error);
+                if (!isOnline) {
+                    // Save order for later sync
+                    savePendingOrder(orderData);
+                    showStatus('تم حفظ الطلب. سيتم إرساله عند استعادة الاتصال', 'success');
+                } else {
+                    showStatus('خطأ في إنشاء الطلب', 'error');
+                }
+            }
+        }
+        
+        function savePendingOrder(orderData) {
+            const pending = JSON.parse(localStorage.getItem('pending_orders') || '[]');
+            pending.push({ ...orderData, id: Date.now() });
+            localStorage.setItem('pending_orders', JSON.stringify(pending));
+        }
+        
+        // Chat function
+        function openChat() {
+            const question = prompt('كيف يمكنني مساعدتك؟');
+            if (!question) return;
+            
+            askChatBot(question);
+        }
+        
+        async function askChatBot(question) {
+            try {
+                const response = await fetch(`${API_BASE}/api/chat/ask`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ message: question })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert(`المساعد الذكي:\n\n${data.response}`);
+                } else {
+                    alert('عذراً، لم أتمكن من فهم سؤالك');
+                }
+            } catch (error) {
+                console.error('Error with chat:', error);
+                alert('المساعد غير متاح حالياً');
+            }
+        }
+        
+        // Utility functions
+        function showLoading(show) {
+            document.getElementById('loading').style.display = show ? 'block' : 'none';
+        }
+        
+        function showStatus(message, type) {
+            const statusEl = document.getElementById('status-message');
+            statusEl.textContent = message;
+            statusEl.className = `status-message status-${type}`;
+            statusEl.style.display = 'block';
+            
+            setTimeout(() => {
+                statusEl.style.display = 'none';
+            }, 5000);
+        }
+        
+        function scrollToProducts() {
+            document.getElementById('products-section').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+        
+        // Search on Enter key
+        document.getElementById('search-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchProducts();
+            }
+        });
+        
+        // Request notification permission
+        if ('Notification' in window && Notification.permission === 'default') {
+            Notification.requestPermission();
+        }
+        
+        // Handle touch gestures for mobile
+        let touchStartY = 0;
+        document.addEventListener('touchstart', e => {
+            touchStartY = e.touches[0].clientY;
+        });
+        
+        document.addEventListener('touchmove', e => {
+            const touchY = e.touches[0].clientY;
+            const touchDiff = touchStartY - touchY;
+            
+            // Pull to refresh (simplified)
+            if (touchDiff < -100 && window.scrollY === 0) {
+                // Could implement pull to refresh here
+            }
+        });
+    </script>
+</body>
+</html>
+
